@@ -1,0 +1,14 @@
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\bin\Debug\netcoreapp2.1\API_Tradingcenter.deps.json
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\bin\Debug\netcoreapp2.1\API_Tradingcenter.runtimeconfig.json
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\bin\Debug\netcoreapp2.1\API_Tradingcenter.runtimeconfig.dev.json
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\bin\Debug\netcoreapp2.1\API_Tradingcenter.dll
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\bin\Debug\netcoreapp2.1\API_Tradingcenter.pdb
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\obj\Debug\netcoreapp2.1\API_Tradingcenter.csprojAssemblyReference.cache
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\obj\Debug\netcoreapp2.1\API_Tradingcenter.csproj.CoreCompileInputs.cache
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\obj\Debug\netcoreapp2.1\API_Tradingcenter.RazorAssemblyInfo.cache
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\obj\Debug\netcoreapp2.1\API_Tradingcenter.RazorAssemblyInfo.cs
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\obj\Debug\netcoreapp2.1\API_Tradingcenter.AssemblyInfoInputs.cache
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\obj\Debug\netcoreapp2.1\API_Tradingcenter.AssemblyInfo.cs
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\obj\Debug\netcoreapp2.1\API_Tradingcenter.RazorTargetAssemblyInfo.cache
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\obj\Debug\netcoreapp2.1\API_Tradingcenter.dll
+C:\Users\Quentin\Documents\Workspace\SP\API_Tradingcenter\obj\Debug\netcoreapp2.1\API_Tradingcenter.pdb
