@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API_Tradingcenter.Database;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Tradingcenter.Controllers
@@ -10,18 +11,28 @@ namespace API_Tradingcenter.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly DatabaseContext context;
+
+        public ValuesController(DatabaseContext context)
+        {
+            this.context = context;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IActionResult GetValues()
         {
-            return new string[] { "value1", "value2" };
+            var values = context.Value.ToList();
+            
+            return Ok(values);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public IActionResult GetValue(int id)
         {
-            return "value";
+            var value = context.Value.FirstOrDefault(x => x.Id == id);
+            return Ok(value);
         }
 
         // POST api/values
