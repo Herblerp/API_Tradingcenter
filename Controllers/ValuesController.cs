@@ -22,7 +22,7 @@ namespace API_Tradingcenter.Controllers
         [HttpGet]
         public IActionResult GetValues()
         {
-            var values = context.Value.ToList();
+            var values = context.Values.ToList();
             
             return Ok(values);
         }
@@ -31,7 +31,7 @@ namespace API_Tradingcenter.Controllers
         [HttpGet("{id}")]
         public IActionResult GetValue(int id)
         {
-            var value = context.Value.FirstOrDefault(x => x.Id == id);
+            var value = context.Values.FirstOrDefault(x => x.Id == id);
             return Ok(value);
         }
 

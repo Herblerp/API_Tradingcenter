@@ -7,6 +7,7 @@ namespace API_Tradingcenter.Database
     {
        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options){} 
 
-       public DbSet<Value> Value {get; set;}
+       public DbSet<Value> Values {get; set;}
+       public DbSet<User> Users {get; set;}
     }
 }
