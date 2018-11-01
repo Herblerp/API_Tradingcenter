@@ -1,3 +1,5 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API_Tradingcenter.Data;
@@ -59,10 +61,21 @@ namespace API_Tradingcenter.Controllers
                 new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
 
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(config.GetSection("Apsettings:Token").Value));
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(config.GetSection("Appsettings:Token").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds
+            };
+
+            var tokenhandler = new JwtSecurityTokenHandler();
+
+            var token = tokenhandler.CreateToken(tokenDescriptor);
+            return Ok(new {token = tokenhandler.WriteToken(token)});
 
         }
 
