@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace API_Tradingcenter.Models
@@ -16,5 +17,7 @@ namespace API_Tradingcenter.Models
         public byte[] PasswordHash{get; set;}
         [Required]
         public byte[] PasswordSalt{get; set;}
+        public List<Order> Orders{get; set;}
+
     }
 }

@@ -1,16 +1,26 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace API_Tradingcenter.Models
 {
     public class Order
     {
-        public int OrderId{get; set;}
-        public string Exchange{get; set;}
-        public bool IsBuy{get; set;}
-        public string Symbol{get; set;}
-        public double Qty{get; set;}
-        public double Currency{get; set;}
-        public double Price{get; set;}
-        public DateTime TimePlaced{get; set;}
+        public int OrderId { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
+        [Required]
+        public string Exchange { get; set; }
+        [Required]
+        public bool IsBuy { get; set; }
+        [Required]
+        public string Symbol { get; set; }
+        [Required]
+        public double Qty { get; set; }
+        [Required]
+        public string Currency { get; set; }
+        [Required]
+        public double Price { get; set; }
+        [Required]
+        public DateTime TimePlaced { get; set; }
     }
 }

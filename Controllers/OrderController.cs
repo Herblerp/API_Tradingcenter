@@ -15,7 +15,8 @@ namespace API_Tradingcenter.Controllers
             this.repo = IOrderRepository;
         }
         [HttpPost("request")]
-        public async Task<IActionResult> RequestOrders(RequestForOrdersDTO resuest){
+        public async Task<IActionResult> RequestOrders(RequestForOrdersDTO request){
+            
             return StatusCode(500);
         }
 

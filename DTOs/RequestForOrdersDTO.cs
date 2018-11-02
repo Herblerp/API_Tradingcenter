@@ -6,5 +6,6 @@ namespace API_Tradingcenter.DTOs
     {
         public DateTime from{get; set;}
         public DateTime to {get; set;}
+        public int userId{get; set;}
     }
 }
