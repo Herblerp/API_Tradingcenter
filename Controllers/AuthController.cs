@@ -34,20 +34,24 @@ namespace API_Tradingcenter.Controllers
                 if (await repo.UserExists(userToRegisterDTO.Username))
                 {
                     //BadRequest
-                    return StatusCode(400,"Username already exists");
+                    return StatusCode(400, "Username already exists");
                 }
-                else
+                if (!repo.IsValidEmail(userToRegisterDTO.Email))
                 {
-                    var userToCreate = new User
-                    {
-                        Username = userToRegisterDTO.Username
-                    };
-
-                    var createdUser = await repo.Register(userToCreate, userToRegisterDTO.Password);
-
-                    //Created
-                    return StatusCode(201);
+                    //BadRequest 
+                    return StatusCode(400, "Email is not valid");
                 }
+                var userToCreate = new User
+                {
+                    Username = userToRegisterDTO.Username,
+                    Email = userToRegisterDTO.Email
+                };
+
+                await repo.Register(userToCreate, userToRegisterDTO.Password);
+
+                //Created
+                return StatusCode(201);
+
             }
             catch
             {

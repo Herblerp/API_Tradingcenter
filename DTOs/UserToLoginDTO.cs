@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace API_Tradingcenter.DTOs
 {
     public class UserToLoginDTO

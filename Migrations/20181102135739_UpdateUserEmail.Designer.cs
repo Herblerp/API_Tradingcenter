@@ -3,14 +3,16 @@ using System;
 using API_Tradingcenter.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API_Tradingcenter.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20181102135739_UpdateUserEmail")]
+    partial class UpdateUserEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,19 +24,15 @@ namespace API_Tradingcenter.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
-                    b.Property<byte[]>("PasswordHash")
-                        .IsRequired();
+                    b.Property<byte[]>("PasswordHash");
 
-                    b.Property<byte[]>("PasswordSalt")
-                        .IsRequired();
+                    b.Property<byte[]>("PasswordSalt");
 
                     b.Property<DateTime>("RegisteredOn");
 
-                    b.Property<string>("Username")
-                        .IsRequired();
+                    b.Property<string>("Username");
 
                     b.HasKey("UserId");
 

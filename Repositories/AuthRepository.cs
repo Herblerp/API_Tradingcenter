@@ -19,11 +19,11 @@ namespace API_Tradingcenter.Data
         {
             var user = await this.context.Users.FirstOrDefaultAsync(x => x.Username == username);
 
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
-            else if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
             {
                 return null;
             }
@@ -38,9 +38,9 @@ namespace API_Tradingcenter.Data
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for(int i = 0; i<computedHash.Length; i++)
+                for (int i = 0; i < computedHash.Length; i++)
                 {
-                    if(computedHash[i] != passwordHash[i])
+                    if (computedHash[i] != passwordHash[i])
                     {
                         return false;
                     }
@@ -76,10 +76,24 @@ namespace API_Tradingcenter.Data
         public async Task<bool> UserExists(string username)
         {
             var user = await this.context.Users.FirstOrDefaultAsync(x => x.Username == username);
-            if(user != null){
+            if (user != null)
+            {
                 return true;
             }
             return false;
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
