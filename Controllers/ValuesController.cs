@@ -21,6 +21,7 @@ namespace API_Tradingcenter.Controllers
         }
 
         // GET api/values
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetValues()
         {

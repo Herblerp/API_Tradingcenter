@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using API_Tradingcenter.Database;
 using API_Tradingcenter.Models;
@@ -55,6 +56,7 @@ namespace API_Tradingcenter.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.RegisteredOn = DateTime.Now;
 
             await this.context.Users.AddAsync(user);
             await this.context.SaveChangesAsync();
