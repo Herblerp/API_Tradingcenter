@@ -27,55 +27,76 @@ namespace API_Tradingcenter.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserToRegisterDTO userToRegisterDTO)
         {
-            userToRegisterDTO.Username = userToRegisterDTO.Username.ToLower();
+            try
+            {
+                userToRegisterDTO.Username = userToRegisterDTO.Username.ToLower();
 
-            if (await repo.UserExists(userToRegisterDTO.Username))
-            {
-                return BadRequest("Username already exists");
-            }
-            else
-            {
-                var userToCreate = new User
+                if (await repo.UserExists(userToRegisterDTO.Username))
                 {
-                    Username = userToRegisterDTO.Username
-                };
+                    //BadRequest
+                    return StatusCode(400,"Username already exists");
+                }
+                else
+                {
+                    var userToCreate = new User
+                    {
+                        Username = userToRegisterDTO.Username
+                    };
 
-                var createdUser = await repo.Register(userToCreate, userToRegisterDTO.Password);
+                    var createdUser = await repo.Register(userToCreate, userToRegisterDTO.Password);
 
-                return StatusCode(201);
+                    //Created
+                    return StatusCode(201);
+                }
+            }
+            catch
+            {
+                return StatusCode(500, "Something went wrong while attempting to register, please try again in a few moments.");
             }
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserToLoginDTO userToLoginDTO)
         {
-            var userFromRepo = await repo.Login(userToLoginDTO.Username.ToLower(), userToLoginDTO.Password);
-
-            if (userFromRepo == null)
+            try
             {
-                return Unauthorized();
+                var userFromRepo = await repo.Login(userToLoginDTO.Username.ToLower(), userToLoginDTO.Password);
+
+                if (userFromRepo == null)
+                {
+                    //Unauthorized
+                    return StatusCode(401, "Bad login");
+                }
+                var claims = new[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, userFromRepo.UserId.ToString()),
+                    new Claim(ClaimTypes.Name, userFromRepo.Username)
+                    //More claims here
+                };
+
+                var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(config.GetSection("Appsettings:Token").Value));
+
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(claims),
+                    Expires = DateTime.Now.AddDays(1),
+                    SigningCredentials = creds
+                };
+
+                var tokenhandler = new JwtSecurityTokenHandler();
+
+                var token = tokenhandler.CreateToken(tokenDescriptor);
+
+                //Ok
+                return StatusCode(200, new { token = tokenhandler.WriteToken(token) });
             }
-            var claims = new[]
+            catch
             {
-                new Claim(ClaimTypes.NameIdentifier, userFromRepo.UserId.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.Username)
-            };
+                return StatusCode(500, "Something went wrong while attempting to log in, please try again in a few moments.");
+            }
 
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(config.GetSection("Appsettings:Token").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
-            };
-
-            var tokenhandler = new JwtSecurityTokenHandler();
-
-            var token = tokenhandler.CreateToken(tokenDescriptor);
-            return Ok(new {token = tokenhandler.WriteToken(token)});
 
         }
 
