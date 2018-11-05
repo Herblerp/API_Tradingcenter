@@ -19,11 +19,29 @@ namespace API_Tradingcenter.Controllers
         {
             this.repo = IOrderRepository;
         }
-        [HttpPost("GetList")]
-        public async Task<IActionResult> RequestOrders(DateRangeDTO dateRange){
+        [HttpPost("GetOrders")]
+        public async Task<IActionResult> GetOrders(DateRangeDTO dateRange){
+
+            //Datetime can not be null
+            if(dateRange.dateTo == DateTime.MinValue){
+                //Bad request
+                return StatusCode(400, "dateTo value can not be null");
+            }
+
+            var userId = Int32.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            return Ok(await repo.GetOrders(dateRange, userId));
+
+
+        }
+        [HttpPost("RefreshOrders")]
+        public async Task<IActionResult> RefreshOrders(){
             
             var userId = Int32.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            return Ok()
+
+            //Repo methodes hier
+
+            return Ok();
 
         }
 

@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API_Tradingcenter.Database;
 using API_Tradingcenter.DTOs;
 using API_Tradingcenter.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_Tradingcenter.Repositories
 {
@@ -20,9 +22,11 @@ namespace API_Tradingcenter.Repositories
             return order;
         }
 
-        public async Task<IEnumerable<Order>> GetOrders(DateRangeDTO daterange){
+        public async Task<IEnumerable<Order>> GetOrders(DateRangeDTO daterange, int id){
             
-            var queryResult = context.Orders.Where(x => x.TimePlaced < daterange.dateFrom);
+            var orders = await context.Orders.Where(x => (x.TimePlaced > daterange.dateFrom && x.TimePlaced < daterange.dateTo)&& x.UserId == id).ToListAsync();
+            var lOrders = orders.OrderByDescending(x => x.TimePlaced);
+            return lOrders;
         }
     }
 }

@@ -8,6 +8,6 @@ namespace API_Tradingcenter.Repositories
     public interface IOrderRepository
     {
         Task<Order> SaveOrder(Order order);
-        Task<IEnumerable<Order>> GetOrders(DateRangeDTO daterange);
+        Task<IEnumerable<Order>> GetOrders(DateRangeDTO daterange, int id);
     }
 }
