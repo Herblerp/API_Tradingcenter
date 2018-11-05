@@ -1,12 +1,16 @@
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using API_Tradingcenter.DTOs;
 using API_Tradingcenter.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Tradingcenter.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrderController : ControllerBase
     {
        private readonly IOrderRepository repo;
@@ -14,10 +18,16 @@ namespace API_Tradingcenter.Controllers
         {
             this.repo = IOrderRepository;
         }
-        [HttpPost("request")]
-        public async Task<IActionResult> RequestOrders(RequestForOrdersDTO request){
+        [HttpGet("{id}")]
+        public async Task<IActionResult> RequestOrders(int id){
             
-            return StatusCode(500);
+            var userId = Int32.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if(userId == id){
+                return StatusCode(200);
+            }
+            return Unauthorized();
+            
         }
 
     }
