@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API_Tradingcenter.DTOs;
@@ -11,23 +12,19 @@ namespace API_Tradingcenter.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class OrderController : ControllerBase
+    public class OrdersController : ControllerBase
     {
        private readonly IOrderRepository repo;
-        public OrderController (IOrderRepository IOrderRepository)
+        public OrdersController (IOrderRepository IOrderRepository)
         {
             this.repo = IOrderRepository;
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> RequestOrders(int id){
+        [HttpPost("GetList")]
+        public async Task<IActionResult> RequestOrders(DateRangeDTO dateRange){
             
             var userId = Int32.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            return Ok()
 
-            if(userId == id){
-                return StatusCode(200);
-            }
-            return Unauthorized();
-            
         }
 
     }
