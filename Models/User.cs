@@ -18,6 +18,7 @@ namespace API_Tradingcenter.Models
         [Required]
         public byte[] PasswordSalt{get; set;}
         public List<Order> Orders{get; set;}
+        public DateTime LastRefresh{get; set;}
 
     }
 }

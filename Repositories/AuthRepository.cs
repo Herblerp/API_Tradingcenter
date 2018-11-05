@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using API_Tradingcenter.Database;
 using API_Tradingcenter.Models;
+using API_Tradingcenter.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_Tradingcenter.Data

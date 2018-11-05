@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using API_Tradingcenter.DTOs;
+using API_Tradingcenter.Helpers;
 using API_Tradingcenter.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,31 +15,40 @@ namespace API_Tradingcenter.Controllers
     public class OrdersController : ControllerBase
     {
        private readonly IOrderRepository repo;
-        public OrdersController (IOrderRepository IOrderRepository)
+       private readonly IAuthRepository authRepo;
+        public OrdersController (IOrderRepository IOrderRepository, IAuthRepository IAuthRepository)
         {
             this.repo = IOrderRepository;
+            this.authRepo = IAuthRepository;
         }
-        [HttpPost("GetOrders")]
-        public async Task<IActionResult> GetOrders(DateRangeDTO dateRange){
 
-            //Datetime can not be null
-            if(dateRange.dateTo == DateTime.MinValue){
+//      /api/orders/get
+        [HttpPost("get")]
+        public async Task<IActionResult> GetOrders(DateRange dateRange)
+        {
+            //Check if the date is not null
+            if(dateRange.dateTo == DateTime.MinValue)
+            {
                 //Bad request
-                return StatusCode(400, "dateTo value can not be null");
+                return StatusCode(400, "Date can not be null");
             }
 
             var userId = Int32.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            return Ok(await repo.GetOrders(dateRange, userId));
-
-
+            
+            return Ok(await repo.GetOrderList(dateRange, userId));
         }
-        [HttpPost("RefreshOrders")]
+
+//      /api/orders/refresh
+        [HttpPost("refresh")]
         public async Task<IActionResult> RefreshOrders(){
             
             var userId = Int32.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            //Repo methodes hier
+            await repo.UpdateRefreshDateTime(userId);
+            
+            //?Decide which orders to fetch?
+            //Get orders from exchanges
+            //Put all fetched orders in list
+            //Save new orders in database
 
             return Ok();
 

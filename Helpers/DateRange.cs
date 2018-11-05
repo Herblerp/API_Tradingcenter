@@ -1,13 +1,11 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace API_Tradingcenter.DTOs
+namespace API_Tradingcenter.Helpers
 {
-    public class DateRangeDTO
+    public class DateRange
     {
-        [Required]
         public DateTime dateFrom{get; set;}
-        [Required]
         public DateTime dateTo {get; set;}
     }
 }
