@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 //This is the class that should be called whenever an interaction with the BitMEX API is required, as it implements all other BitMEX classes
 //This class should only be called at most once every 2 seconds per account, or BitMEX will start to limit your rate
-namespace BitMEX_API
+namespace API_Tradingcenter.BitMEX_API
 {
     class BitMEX
     {
         //Returntype should probably be something else, to prevent a clusterfuck of conversions between different Order classes in the class where this method gets called
-        public static List<BitMEXOrder> getAllOrders(string apiKey, string apiSecret)
+        public static List<BitMEXOrder> getAllBitMEXOrders(string apiKey, string apiSecret)
         {
             BitMEXApi bitmex = new BitMEXApi(apiKey, apiSecret);
             List<BitMEXOrder> orderlist = new List<BitMEXOrder>();
@@ -62,7 +62,7 @@ namespace BitMEX_API
         }
 
         //Returntype should probably be something else, to prevent a clusterfuck of conversions between different Order classes in the class where this method gets called
-        public static List<BitMEXOrder> getOrdersSince(string apiKey, string apiSecret, DateTime dt)
+        public static List<BitMEXOrder> getBitMEXOrdersSince(string apiKey, string apiSecret, DateTime dt)
         {
             BitMEXApi bitmex = new BitMEXApi(apiKey, apiSecret);
             List<BitMEXOrder> orderlist = new List<BitMEXOrder>();
@@ -111,7 +111,7 @@ namespace BitMEX_API
         }
 
         //Returntype should probably be something else, to prevent a clusterfuck of conversions between different Order classes in the class where this method gets called
-        public static List<BitMEXPosition> getAllPositions(string apiKey, string apiSecret)
+        public static List<BitMEXPosition> getAllBitMEXPositions(string apiKey, string apiSecret)
         {
             BitMEXApi bitmex = new BitMEXApi(apiKey, apiSecret);
             List<BitMEXPosition> positionlist = new List<BitMEXPosition>();
@@ -160,7 +160,7 @@ namespace BitMEX_API
         }
 
         //Returntype should probably be something else, to prevent a clusterfuck of conversions between different Order classes in the class where this method gets called
-        public static List<BitMEXPosition> getPositionsSince(string apiKey, string apiSecret, DateTime dt)
+        public static List<BitMEXPosition> getBitMEXPositionsSince(string apiKey, string apiSecret, DateTime dt)
         {
             BitMEXApi bitmex = new BitMEXApi(apiKey, apiSecret);
             List<BitMEXPosition> positionlist = new List<BitMEXPosition>();
@@ -209,7 +209,7 @@ namespace BitMEX_API
         }
 
         //Returntype should probably be something else, to prevent a clusterfuck of conversions between different Order classes in the class where this method gets called
-        public static List<BitMEXWallet> getWallets(string apiKey, string apiSecret)
+        public static List<BitMEXWallet> getBitMEXWallets(string apiKey, string apiSecret)
         {
             BitMEXApi bitmex = new BitMEXApi(apiKey, apiSecret);
             List<BitMEXWallet> walletlist = new List<BitMEXWallet>();

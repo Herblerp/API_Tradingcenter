@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
-namespace BitMEX_API
+namespace API_Tradingcenter.BitMEX_API
 {
     public class OrderBookItem
     {

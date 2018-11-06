@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BitMEX_API
+namespace API_Tradingcenter.BitMEX_API
 {
     class BitMEXWallet
     {

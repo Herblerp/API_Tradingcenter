@@ -1,11 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers",
     "\\DTOs",
     "\\ExchangeRepo",
-    "\\ExchangeRepo\\BitMEX"
+    "\\ExchangeRepo\\BitMEX",
+    "\\Models"
   ],
-  "SelectedNode": "\\ExchangeRepo",
+  "SelectedNode": "\\ExchangeRepo\\Wrapper.cs",
   "PreviewInSolutionExplorer": false
 }
