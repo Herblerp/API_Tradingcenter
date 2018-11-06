@@ -62,6 +62,7 @@ namespace API_Tradingcenter.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserToLoginDTO userToLoginDTO)
         {
+            throw new Exception("Hello world!");
             try
             {
                 var userFromRepo = await repo.Login(userToLoginDTO.Username.ToLower(), userToLoginDTO.Password);
