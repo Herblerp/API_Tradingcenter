@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Controllers",
+    "\\DTOs",
+    "\\ExchangeRepo",
+    "\\ExchangeRepo\\BitMEX"
+  ],
+  "SelectedNode": "\\ExchangeRepo",
+  "PreviewInSolutionExplorer": false
+}
