@@ -1,14 +1,11 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace API_Tradingcenter.Models
+namespace API_Tradingcenter.DTOs
 {
-    public class Order
+    public class OrderForDatabase
     {
-        [Key]
-        public string OrderId { get; set; }
+        public int OrderId { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
         [Required]
         public string Exchange { get; set; }
         [Required]
@@ -21,7 +18,5 @@ namespace API_Tradingcenter.Models
         public string Currency { get; set; }
         [Required]
         public double Price { get; set; }
-        [Required]
-        public DateTime TimePlaced { get; set; }
     }
 }

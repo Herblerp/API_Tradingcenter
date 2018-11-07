@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using API_Tradingcenter.BitMEX_API;
 using API_Tradingcenter.Helpers;
 using API_Tradingcenter.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -44,6 +45,8 @@ namespace API_Tradingcenter.Controllers
             
             var userId = Int32.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
             await repo.UpdateRefreshDateTime(userId);
+
+            await repo.SaveOrderList(Wrapper.getAllOrders("FO_DwD6WrxiP2oz4dOr-sOlI", "hOMcB0cin9hMqIMMCJbWAfcK8XkgNFKgBaU1Z6eNe2CAigg2", userId));
             
             //?Decide which orders to fetch?
             //Get orders from exchanges

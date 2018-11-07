@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API_Tradingcenter.BitMEX_API;
 using API_Tradingcenter.Database;
 using API_Tradingcenter.Helpers;
 using API_Tradingcenter.Models;
@@ -30,8 +31,9 @@ namespace API_Tradingcenter.Repositories
 
         public async Task<IEnumerable<Order>> GetOrderList(DateRange daterange, int id){
             
-            var orders = await context.Orders.Where(x => (x.TimePlaced > daterange.dateFrom && x.TimePlaced < daterange.dateTo)&& x.UserId == id).ToListAsync();
+            var orders = await context.Orders.Where(x => x.UserId == id).ToListAsync();
             var lOrders = orders.OrderByDescending(x => x.TimePlaced);
+            
             return lOrders;
         }
 
