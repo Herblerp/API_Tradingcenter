@@ -18,37 +18,52 @@ namespace API_Tradingcenter.Repositories
             this.context = context;
         }
 
-        public async Task<IEnumerable<Order>> SaveOrderList(IEnumerable<Order> orderList){
+        public async Task<IEnumerable<Order>> SaveOrderList(IEnumerable<Order> orderList)
+        {
 
-            foreach (var order in orderList){
-            
-            await this.context.Orders.AddAsync(order);
-            await this.context.SaveChangesAsync();
+            foreach (var order in orderList)
+            {
+                if (! await OrderExists(order))
+                {
+                    await this.context.Orders.AddAsync(order);
+                    await this.context.SaveChangesAsync();
+                }
             }
 
             return orderList;
         }
 
-        public async Task<IEnumerable<Order>> GetOrderList(DateRange daterange, int id){
-            
+        public async Task<IEnumerable<Order>> GetOrderList(DateRange daterange, int id)
+        {
+
             var orders = await context.Orders.Where(x => x.UserId == id).ToListAsync();
             var lOrders = orders.OrderByDescending(x => x.TimePlaced);
-            
+
             return lOrders;
         }
 
-        public async Task<bool> UpdateRefreshDateTime(int id){
-            
+        public async Task<bool> UpdateRefreshDateTime(int id)
+        {
+
             var userToUpdate = await this.context.Users.FirstOrDefaultAsync(x => x.UserId == id);
 
-            if(userToUpdate == null){
+            if (userToUpdate == null)
+            {
                 return false;
             }
-            
+
             userToUpdate.LastRefresh = DateTime.Now;
             this.context.Update(userToUpdate);
             await this.context.SaveChangesAsync();
             return true;
+        }
+        public async Task<bool>OrderExists(Order order){
+
+             Order compare = await context.Orders.FirstOrDefaultAsync(x => x.OrderId == order.OrderId);
+             if(compare == null){
+                 return false;
+             }
+             return true;
         }
     }
 }

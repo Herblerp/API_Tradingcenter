@@ -11,5 +11,6 @@ namespace API_Tradingcenter.Repositories
         Task<IEnumerable<Order>> SaveOrderList(IEnumerable<Order> orderList);
         Task<IEnumerable<Order>> GetOrderList(DateRange daterange, int id);
         Task<bool> UpdateRefreshDateTime(int id);
+        Task<bool> OrderExists(Order order);
     }
 }

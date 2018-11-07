@@ -9,6 +9,7 @@ namespace API_Tradingcenter.Models
         public string OrderId { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        
         [Required]
         public string Exchange { get; set; }
         [Required]
